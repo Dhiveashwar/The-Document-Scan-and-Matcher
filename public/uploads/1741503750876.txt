@@ -1,0 +1,287 @@
+root@Dhiveash:~/ansible# mkdir second-playbook
+root@Dhiveash:~/ansible# cd second-playbook
+root@Dhiveash:~/ansible/second-playbook# ansible-galaxy role init kubernetes
+- Role kubernetes was created successfully
+root@Dhiveash:~/ansible/second-playbook# ls
+kubernetes
+root@Dhiveash:~/ansible/second-playbook# ls kubernetes
+README.md  defaults  handlers  meta  tasks  tests  vars
+root@Dhiveash:~/ansible/second-playbook# ls -ltr
+total 4
+drwxr-xr-x 8 root root 4096 Oct 26 19:17 kubernetes
+root@Dhiveash:~/ansible/second-playbook# ls -ltr kubernetes/
+total 28
+-rw-r--r-- 1 root root 1328 Oct 26 19:17 README.md
+drwxr-xr-x 2 root root 4096 Oct 26 19:17 tests
+drwxr-xr-x 2 root root 4096 Oct 26 19:17 vars
+drwxr-xr-x 2 root root 4096 Oct 26 19:17 meta
+drwxr-xr-x 2 root root 4096 Oct 26 19:17 handlers
+drwxr-xr-x 2 root root 4096 Oct 26 19:17 tasks
+drwxr-xr-x 2 root root 4096 Oct 26 19:17 defaults
+root@Dhiveash:~/ansible/second-playbook# cd /
+root@Dhiveash:/# terraform
+Command 'terraform' not found, but can be installed with:
+snap install terraform
+root@Dhiveash:/# sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:3 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [2113 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1133 kB]
+Fetched 3629 kB in 4s (1001 kB/s)
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+gnupg is already the newest version (2.2.27-3ubuntu2.1).
+gnupg set to manually installed.
+software-properties-common is already the newest version (0.99.22.9).
+software-properties-common set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+root@Dhiveash:/# wget -O- https://apt.releases.hashicorp.com/gpg | \
+gpg --dearmor | \
+sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+--2024-10-27 17:07:26--  https://apt.releases.hashicorp.com/gpg
+Resolving apt.releases.hashicorp.com (apt.releases.hashicorp.com)... 108.158.221.60, 108.158.221.108, 108.158.221.89, ...
+Connecting to apt.releases.hashicorp.com (apt.releases.hashicorp.com)|108.158.221.60|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3980 (3.9K) [binary/octet-stream]
+Saving to: ‘STDOUT’
+
+-                  100%[================>]   3.89K  --.-KB/s    in 0.002s
+
+2024-10-27 17:07:27 (1.79 MB/s) - written to stdout [3980/3980]
+
+root@Dhiveash:/# gpg --no-default-keyring \
+--keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
+--fingerprint
+gpg: directory '/root/.gnupg' created
+gpg: /root/.gnupg/trustdb.gpg: trustdb created
+/usr/share/keyrings/hashicorp-archive-keyring.gpg
+-------------------------------------------------
+pub   rsa4096 2023-01-10 [SC] [expires: 2028-01-09]
+      798A EC65 4E5C 1542 8C8E  42EE AA16 FCBC A621 E701
+uid           [ unknown] HashiCorp Security (HashiCorp Package Signing) <security+packaging@hashicorp.com>
+sub   rsa4096 2023-01-10 [S] [expires: 2028-01-09]
+
+root@Dhiveash:/# gpg
+gpg: keybox '/root/.gnupg/pubring.kbx' created
+gpg: WARNING: no command supplied.  Trying to guess what you mean ...
+gpg: Go ahead and type your message ...
+
+
+^C
+gpg: signal 2 caught ... exiting
+
+root@Dhiveash:/# echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+sudo tee /etc/apt/sources.list.d/hashicorp.list
+deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com jammy main
+root@Dhiveash:/# sudo apt update
+Get:1 https://apt.releases.hashicorp.com jammy InRelease [12.9 kB]
+Get:2 https://apt.releases.hashicorp.com jammy/main amd64 Packages [154 kB]
+Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:4 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Fetched 167 kB in 2s (97.8 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+root@Dhiveash:/# sudo apt-get install terraform
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  terraform
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 28.0 MB of archives.
+After this operation, 89.1 MB of additional disk space will be used.
+Get:1 https://apt.releases.hashicorp.com jammy/main amd64 terraform amd64 1.9.8-1 [28.0 MB]
+Fetched 28.0 MB in 4s (6897 kB/s)
+Selecting previously unselected package terraform.
+(Reading database ... 95611 files and directories currently installed.)
+Preparing to unpack .../terraform_1.9.8-1_amd64.deb ...
+Unpacking terraform (1.9.8-1) ...
+Setting up terraform (1.9.8-1) ...
+root@Dhiveash:/# terraform -help
+Usage: terraform [global options] <subcommand> [args]
+
+The available commands for execution are listed below.
+The primary workflow commands are given first, followed by
+less common or more advanced commands.
+
+Main commands:
+  init          Prepare your working directory for other commands
+  validate      Check whether the configuration is valid
+  plan          Show changes required by the current configuration
+  apply         Create or update infrastructure
+  destroy       Destroy previously-created infrastructure
+
+All other commands:
+  console       Try Terraform expressions at an interactive command prompt
+  fmt           Reformat your configuration in the standard style
+  force-unlock  Release a stuck lock on the current workspace
+  get           Install or upgrade remote Terraform modules
+  graph         Generate a Graphviz graph of the steps in an operation
+  import        Associate existing infrastructure with a Terraform resource
+  login         Obtain and save credentials for a remote host
+  logout        Remove locally-stored credentials for a remote host
+  metadata      Metadata related commands
+  output        Show output values from your root module
+  providers     Show the providers required for this configuration
+  refresh       Update the state to match remote systems
+  show          Show the current state or a saved plan
+  state         Advanced state management
+  taint         Mark a resource instance as not fully functional
+  test          Execute integration tests for Terraform modules
+  untaint       Remove the 'tainted' state from a resource instance
+  version       Show the current Terraform version
+  workspace     Workspace management
+
+Global options (use these before the subcommand, if any):
+  -chdir=DIR    Switch to a different working directory before executing the
+                given subcommand.
+  -help         Show this help output, or the help for a specified subcommand.
+  -version      An alias for the "version" subcommand.
+root@Dhiveash:/# terraform -help plan
+Usage: terraform [global options] plan [options]
+
+  Generates a speculative execution plan, showing what actions Terraform
+  would take to apply the current configuration. This command will not
+  actually perform the planned actions.
+
+  You can optionally save the plan to a file, which you can then pass to
+  the "apply" command to perform exactly the actions described in the plan.
+
+Plan Customization Options:
+
+  The following options customize how Terraform will produce its plan. You
+  can also use these options when you run "terraform apply" without passing
+  it a saved plan, in order to plan and apply in a single command.
+
+  -destroy            Select the "destroy" planning mode, which creates a plan
+                      to destroy all objects currently managed by this
+                      Terraform configuration instead of the usual behavior.
+
+  -refresh-only       Select the "refresh only" planning mode, which checks
+                      whether remote objects still match the outcome of the
+                      most recent Terraform apply but does not propose any
+                      actions to undo any changes made outside of Terraform.
+
+  -refresh=false      Skip checking for external changes to remote objects
+                      while creating the plan. This can potentially make
+                      planning faster, but at the expense of possibly planning
+                      against a stale record of the remote system state.
+
+  -replace=resource   Force replacement of a particular resource instance using
+                      its resource address. If the plan would've normally
+                      produced an update or no-op action for this instance,
+                      Terraform will plan to replace it instead. You can use
+                      this option multiple times to replace more than one object.
+
+  -target=resource    Limit the planning operation to only the given module,
+                      resource, or resource instance and all of its
+                      dependencies. You can use this option multiple times to
+                      include more than one object. This is for exceptional
+                      use only.
+
+  -var 'foo=bar'      Set a value for one of the input variables in the root
+                      module of the configuration. Use this option more than
+                      once to set more than one variable.
+
+  -var-file=filename  Load variable values from the given file, in addition
+                      to the default files terraform.tfvars and *.auto.tfvars.
+                      Use this option more than once to include more than one
+                      variables file.
+
+Other Options:
+
+  -compact-warnings          If Terraform produces any warnings that are not
+                             accompanied by errors, shows them in a more compact
+                             form that includes only the summary messages.
+
+  -detailed-exitcode         Return detailed exit codes when the command exits.
+                             This will change the meaning of exit codes to:
+                             0 - Succeeded, diff is empty (no changes)
+                             1 - Errored
+                             2 - Succeeded, there is a diff
+
+  -generate-config-out=path  (Experimental) If import blocks are present in
+                             configuration, instructs Terraform to generateHCL
+                             for any imported resources not already present. The
+                             configuration is written to a new file at PATH,
+                             which must not already exist. Terraform may still
+                             attempt to write configuration if the plan errors.
+
+  -input=true                Ask for input for variables if not directly set.
+
+  -lock=false                Don't hold a state lock during the operation. This
+                             is dangerous if others might concurrently run
+                             commands against the same workspace.
+
+  -lock-timeout=0s           Duration to retry a state lock.
+
+  -no-color                  If specified, output won't contain any color.
+
+  -out=path                  Write a plan file to the given path. This can be
+                             used as input to the "apply" command.
+
+  -parallelism=n             Limit the number of concurrent operations. Defaults
+                             to 10.
+
+  -state=statefile           A legacy option used for the local backend only.
+                             See the local backend's documentation for more
+                             information.
+root@Dhiveash:/# terraform -version
+Terraform v1.9.8
+on linux_amd64
+root@Dhiveash:/# cd ..
+root@Dhiveash:/#  su
+root@Dhiveash:/# exit
+exit
+root@Dhiveash:/# sudo su
+root@Dhiveash:/# ls
+ansible  dev   init   lib64       media  proc  sbin  sys  var
+bin      etc   lib    libx32      mnt    root  snap  tmp
+boot     home  lib32  lost+found  opt    run   srv   usr
+root@Dhiveash:/# terraform init
+Terraform initialized in an empty directory!
+
+The directory has no Terraform configuration files. You may begin working
+with Terraform immediately by creating Terraform configuration files.
+root@Dhiveash:/# pwd
+/
+root@Dhiveash:/# vim output.tf
+
+[1]+  Stopped                 vim output.tf
+root@Dhiveash:/# ls -ltr
+total 2276
+drwxr-xr-x   2 root root    4096 Apr 18  2022 boot
+-rwxrwxrwx   1 root root 2260248 Sep 27 06:25 init
+lrwxrwxrwx   1 root root       7 Sep 28 03:05 bin -> usr/bin
+lrwxrwxrwx   1 root root       8 Sep 28 03:05 sbin -> usr/sbin
+lrwxrwxrwx   1 root root       7 Sep 28 03:05 lib -> usr/lib
+lrwxrwxrwx   1 root root       9 Sep 28 03:05 lib32 -> usr/lib32
+lrwxrwxrwx   1 root root       9 Sep 28 03:05 lib64 -> usr/lib64
+lrwxrwxrwx   1 root root      10 Sep 28 03:05 libx32 -> usr/libx32
+drwxr-xr-x   2 root root    4096 Sep 28 03:05 srv
+drwxr-xr-x   2 root root    4096 Sep 28 03:05 opt
+drwxr-xr-x   2 root root    4096 Sep 28 03:05 media
+drwxr-xr-x  14 root root    4096 Sep 28 03:05 usr
+drwxr-xr-x  13 root root    4096 Sep 28 03:07 var
+drwx------   2 root root   16384 Oct  6 12:32 lost+found
+drwxr-xr-x   9 root root    4096 Oct  6 12:32 mnt
+drwxr-xr-x   2 root root    4096 Oct  6 12:32 snap
+drwxr-xr-x   3 root root    4096 Oct  6 12:34 home
+drwxr-xr-x   2 root root    4096 Oct 26 01:19 ansible
+dr-xr-xr-x  11 root root       0 Oct 26 18:45 sys
+dr-xr-xr-x 210 root root       0 Oct 26 18:45 proc
+drwxr-xr-x  16 root root    3560 Oct 26 18:46 dev
+drwxr-xr-x  83 root root    4096 Oct 26 18:46 etc
+drwxr-xr-x  19 root root     580 Oct 27 17:07 run
+drwx------  11 root root    4096 Oct 27 17:08 root
+drwxrwxrwt  11 root root    4096 Oct 27 17:23 tmp
+root@Dhiveash:/#

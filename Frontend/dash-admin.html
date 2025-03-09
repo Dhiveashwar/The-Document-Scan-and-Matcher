@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Management</title>
+    <link rel="stylesheet" href="css/foradmin.css">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Management Console</h2>
+        
+        <div class="section">
+            <h3><i class="fas fa-coins icon"></i> Pending Credit Approvals</h3>
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ACCOUNT</th>
+                            <th>REQUESTED</th>
+                            <th>CURRENT</th>
+                            <th>OPTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="request-for-credit">
+                        <!-- JS will fill this -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3><i class="fas fa-chart-bar icon"></i> System Usage</h3>
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ACCOUNT</th>
+                            <th>USAGE</th>
+                            <th>BALANCE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userStats">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button class="btn-logout" onclick="endSession()">
+                <i class="fas fa-sign-out-alt icon"></i> End Session
+            </button>
+        </div>
+
+       
+    </div>
+    
+    <script src="js/authenication.js"></script>
+    <script>
+        
+        function endSession() {
+            localStorage.removeItem("token");
+            localStorage.removeItem("role");
+            window.location.href = "index.html";
+        }
+    </script>
+    <script src="js/foradmin.js"></script>
+</body>
+</html>

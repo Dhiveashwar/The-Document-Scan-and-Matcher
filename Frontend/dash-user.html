@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyDocScanner</title>
+  
+    <link rel="stylesheet" href="css/dash.css">
+</head>
+<body>
+   
+    <div class="container">
+      
+        <h2>Hello, <span id="username"></span>!</h2>
+        <div class="user-info">
+            <p><strong>Account Type:</strong> <span id="role"></span></p>
+            <p><strong>Your Balance:</strong> <span id="credits"></span> credits</p>
+        </div>
+        
+        <!--for uploading the box-->
+        <div class="upload-box">
+            <h3>Check Document</h3>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="file-picker">
+                    <input type="file" id="document" accept=".txt" required>
+                </div>
+                <button type="submit" class="scan-btn">Check Now</button>
+            </form>
+        </div>
+        
+        <!-- For getting the result area -->
+        <div class="results-panel">
+            <h3>What We Found</h3>
+            <ul id="matchResults" class="match-list"></ul>
+        </div>
+
+        <div class="history-panel">
+            <h3>Your Recent Scans</h3>
+            <ul id="scanHistory" class="history-list"></ul>
+        </div>
+
+        <div class="credits-section">
+            <h3>Running Low?</h3>
+            <a href="credit-request.html" class="credit-link">Add More Credits</a>
+        </div>
+        
+        <!-- logout button -->
+        <button onclick="logMeOut()" class="logout-btn">Exit</button>
+    </div>
+
+    <script src="js/user.js"></script>
+    <script>
+        
+        function logMeOut() {
+          
+            localStorage.removeItem("token");
+            localStorage.removeItem("role");
+          
+            window.location.href = "index.html";
+        }
+    </script>
+    <script src="js/scan.js"></script>
+</body>
+</html>

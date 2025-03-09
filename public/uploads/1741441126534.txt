@@ -1,0 +1,53 @@
+ps - commmand used to find the process
+|  - pipe command
+cURL - which stands for client URL, is a command line tool that developers use to transfer data to and from a server 
+grep - The grep command in Unix/Linux is a powerful tool used for searching and manipulating text patterns within files.
+wget - The wget command is a powerful command-line tool used in Linux and Unix-based systems to retrieve files from the internet via HTTP, HTTPS
+find - it finds if we give the location exactly.
+trap - for trapping the signals(we are using some cammands and now ctrl c is used to stoppped and this type command to stop is like traping the signals.)
+
+inteview questions on linux:
+
+1. list some most commonly used shell commands?
+
+ans: ls, cp , mv, mkdir, touch, vim, grep
+
+2. write a simple shell scrip to list the process?
+
+ans: ps -ef
+
+3. write the script to print only errors from remot log?
+
+ans: Curl google.com | grep HREF
+
+4. write shell script t print numbers divided by 3 & 5 and not 15?
+
+ans: search in gemini
+
+5. write a script to print number "S" in missipsipi
+
+ans: search in gemini
+
+6. how will u debug the shell script?
+
+ans: set -x
+
+7. what is crontab in linux? give example of usage?
+
+ans: search gemini
+
+8. what is difference betwee soft and hard link?   and also break and continue statement difference?
+
+ans: search geimini
+
+9. what are the disadvantages of shell scripting? is bash dynamic or statically typed?
+
+ans: search gemini
+
+10. what are network trouble shooting scripts? and how will u sort list of names in a file? 
+
+ans: search gemini
+
+Birth of Linux - 1969
+
+
